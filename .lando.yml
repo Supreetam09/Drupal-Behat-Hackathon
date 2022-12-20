@@ -1,0 +1,55 @@
+name: behat-hackathon
+recipe: drupal9
+
+config:
+  webroot: web
+  xdebug: true
+  php: '8.1'
+
+services:
+  database:
+    app_mount: disabled
+    type: mariadb
+    creds:
+      user: drupal9
+      password: drupal9
+  appserver:
+    xdebug: true
+    app_mount: delegated
+    type: php:8.1
+    composer_version: 2.4.4
+    run_as_root:
+      # By default disable XDEBUG, we need it enabled to ensure all configurations are loaded.
+      # Post this to enable disable lando xdebug-on and lando xdebug-off can be used.
+      - rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && service apache2 reload
+  chromedriver:
+    type: compose
+    services:
+      image: seleniarm/standalone-chromium:latest
+      shm_size: 2gb
+      ports:
+        - 4444
+        - 5900
+        - 7900
+      environment:
+        JAVA_OPTS: "-Dwebdriver.chrome.whitelistedIps="
+        CHROMEDRIVER_WHITELISTED_IPS: ""
+        CHROMEDRIVER_URL_BASE: "/wd/hub"
+      security_opt:
+        - seccomp:unconfined
+      command: /opt/bin/entry_point.sh
+
+tooling:
+  blt:
+    service: appserver
+    cmd: /app/vendor/acquia/blt/bin/blt
+  xdebug-on:
+    service: appserver
+    description: Enable xdebug for Apache.
+    cmd: docker-php-ext-enable xdebug && service apache2 reload
+    user: root
+  xdebug-off:
+    service: appserver
+    description: Disable xdebug for Apache.
+    cmd: rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && service apache2 reload
+    user: root

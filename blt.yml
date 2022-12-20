@@ -1,0 +1,20 @@
+project:
+  machine_name: behat-hackathon
+  local:
+    hostname: ${project.machine_name}.lndo.site
+    protocol: http
+
+docroot: ${repo.root}/web
+
+behat:
+  web-driver: chromedriver
+  tags: '@example'
+
+tests:
+  browser: chromium
+  selenium:
+    url: http://chromedriver:4444/wd/hub
+  drupal:
+    web-driver: chromedriver
+  chromedriver:
+    port: 4444
