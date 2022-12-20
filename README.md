@@ -2,7 +2,7 @@
 This repository contains basic configuration files to setup and run Behat in a fresh Drupal 9 site
 
 ## Steps to set up Behat in Drupal
-- Copy `.lando.yml` file from [URL]() and paste in project root,
+- Copy `.lando.yml` file from [here](https://github.com/Supreetam09/Drupal-Behat-Hackathon/blob/main/.lando.yml) and paste in project root,
   - Update value of `config.webroot` key to `web` or `docroot` according to your application in `.lando.yml`
   - Update value of keys `creds.user` and `creds.password` according to your DB creds in `.lando.yml`
 
@@ -16,14 +16,14 @@ This repository contains basic configuration files to setup and run Behat in a f
 - Run `lando composer require emuse/behat-html-formatter`
 
 
-- Copy `blt.yml` file from [URL]() and paste inside `blt` folder,
+- Copy `blt.yml` file from [here](https://github.com/Supreetam09/Drupal-Behat-Hackathon/blob/main/blt.yml) and paste inside `blt` folder,
   - Update value of `docroot` key to `web` or `docroot` according to your application in `blt.yml`
 
 
 - Run `lando blt recipes:behat:init`
 
 
-- Copy `behat.yml` file from [URL]() and `example.local.yml` file from [URL]() and paste inside `tests/behat` folder
+- Copy `behat.yml` file from [here](https://github.com/Supreetam09/Drupal-Behat-Hackathon/blob/main/behat.yml) and `example.local.yml` file from [here](https://github.com/Supreetam09/Drupal-Behat-Hackathon/blob/main/example.local.yml) and paste inside `tests/behat` folder
 
 
 - Run `lando blt tests:behat:init`
