@@ -39,6 +39,10 @@ services:
         - seccomp:unconfined
       command: /opt/bin/entry_point.sh
 
+proxy:
+  chromedriver:
+    - novnc-behat-hackathon.lndo.site:7900
+
 tooling:
   blt:
     service: appserver
